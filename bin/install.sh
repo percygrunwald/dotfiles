@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
+
 function print_usage {
+  printf 'Usage: %s [options]\n' ${0##*/}
   cat << 'EOF'
-Usage:  install.sh [options]
 
 Options:
         -f : Overwrite existing files with symlinks without prompting

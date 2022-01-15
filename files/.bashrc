@@ -13,6 +13,9 @@ alias cd..="cd.."
 alias flush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo 'Flushed!'"
 ## Prints the last command in history
 alias q='$(fc -ln -1)'
+function calc {
+  awk "BEGIN {print $*}"
+}
 
 # Bundle
 alias b="bundle"
