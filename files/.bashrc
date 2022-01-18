@@ -91,6 +91,7 @@ alias drdp="drd --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
 alias drp="dr --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
 alias drm="docker rm -f"
 
+
 # Vagrant
 alias vu="vagrant up --parallel"
 alias vd="vagrant destroy --parallel"
@@ -111,36 +112,40 @@ alias sgar='sm git apply --reverse'
 alias m='~/co/manage/script/machines'
 alias mm='m -m'
 alias update_mmap='(cd ~/co/machines-map && gcmp)'
-function mr(){
+function mr {
   m --filter "roles_flat~${1}"
 }
-function ecn(){
+function ecn {
   (cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.rb --cluster ${1})
 }
-function inv(){
+function inv {
   (cd ~/co/manage/extra/ansible && inventories/${1}.sh | jq . | less)
 }
-function fp(){
+function fp {
   branch=`branch`
   git format-patch -1 --stdout > ~/patches/${branch}
   echo ${branch}
 }
-function p(){
+function p {
   branch=`branch`
   fp && scp ~/patches/${branch} ${1}:~
 }
-function ar() {
+function ar {
   (cd extra/ansible && sudo bin/ansible-role ${1} -v -D)
 }
-function clrq() {
+function clrq {
   (cd ~/co/manage/ && be script/elasticsearch/cancel_long_running_tasks.rb --action-filter "indices:data/read/search" --target-cluster ${1})
 }
-function lrq() {
+function lrq {
   clrq "${1} --list"
 }
-fixssh() {
+function fixssh {
   eval $(tmux show-env -s |grep '^SSH_')
 }
+function github_stars {
+  curl -s "https://api.github.com/repos/${1}" | jq '.["stargazers_count"]'
+}
+
 if [ -d "$HOME/co/manage-released" ]; then
   cd ~/co/manage-released
 elif [ -d "$HOME/co/manage" ]; then
