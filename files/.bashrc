@@ -101,6 +101,9 @@ alias vp="vagrant provision"
 # pip
 export PATH=~/.local/bin:$PATH
 
+# Homebrew gnu-sed
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
 # Meraki
 alias s0='svn revert -R . && svn st | cut -d " " -f 8 | xargs rm -rf'
 alias s1='svn up && be script/svn_avail_fast.rb -U'
