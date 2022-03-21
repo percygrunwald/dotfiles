@@ -56,9 +56,10 @@ alias gcapf="git commit --all --amend --no-edit && git push --force"
 alias gp="git push"
 alias gpf="gp --force"
 alias grm='git fetch && git rebase origin/master'
+alias grma='git fetch && git rebase origin/main'
 alias gc='git checkout'
-alias gcm='gc master'
-alias gcmp='gcm && git pull'
+alias gcmp='gc master && git pull'
+alias gcmap='gc main && git pull'
 alias gs='git status'
 alias gd='git diff'
 alias gcane='git commit --all --amend --no-edit'
@@ -80,6 +81,9 @@ alias hugodate="date '+%FT%T+08:00' | pbcopy && pbpaste && echo"
 alias pyserver="python -m SimpleHTTPServer"
 alias venv="source .venv/bin/activate"
 
+# pip
+export PATH=~/.local/bin:$PATH
+
 # Docker
 alias de="docker exec"
 alias deit="de -i -t"
@@ -91,15 +95,11 @@ alias drdp="drd --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
 alias drp="dr --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
 alias drm="docker rm -f"
 
-
 # Vagrant
 alias vu="vagrant up --parallel"
 alias vd="vagrant destroy --parallel"
 alias vdu="vd && vu"
 alias vp="vagrant provision"
-
-# pip
-export PATH=~/.local/bin:$PATH
 
 # Homebrew gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
@@ -116,11 +116,17 @@ alias s3='svn commit -F svnmerge-commit-message.txt'
 alias sst='sm svn st'
 alias sga='sm git apply'
 alias sgar='sm git apply --reverse'
-alias m='~/co/manage/script/machines'
-alias mm='m -m'
 alias update_mmap='(cd ~/co/machines-map && gcmp)'
+alias cdl='cd ~/co/manage'
+alias cdlr='cd ~/co/manage-released'
+alias m='~/co/manage/script/machines'
+function mm {
+  if [ "$1" == "" ]; do exit(0); fi
+  jq -r ".[] | select(.name == \"$1\")" < /var/local/meraki/inventory/machines_map.json
+}
 function mr {
-  m --filter "roles_flat~${1}"
+  if [ "$1" == "" ]; do exit(0); fi
+  jq -cr ".[] | select(.roles_flat | any(test(\"$1\"))) " < /var/local/meraki/inventory/machines_map.json
 }
 function ecn {
   (cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.rb --cluster ${1})
@@ -152,9 +158,3 @@ function fixssh {
 function github_stars {
   curl -s "https://api.github.com/repos/${1}" | jq '.["stargazers_count"]'
 }
-
-if [ -d "$HOME/co/manage-released" ]; then
-  cd ~/co/manage-released
-elif [ -d "$HOME/co/manage" ]; then
-  cd ~/co/manage
-fi
