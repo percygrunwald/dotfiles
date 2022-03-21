@@ -121,12 +121,12 @@ alias cdl='cd ~/co/manage'
 alias cdlr='cd ~/co/manage-released'
 alias m='~/co/manage/script/machines'
 function mm {
-  if [ "$1" == "" ]; do exit(0); fi
+  if [ "$1" == "" ]; then return; fi
   jq -r ".[] | select(.name == \"$1\")" < /var/local/meraki/inventory/machines_map.json
 }
 function mr {
-  if [ "$1" == "" ]; do exit(0); fi
-  jq -cr ".[] | select(.roles_flat | any(test(\"$1\"))) " < /var/local/meraki/inventory/machines_map.json
+  if [ "$1" == "" ]; then return; fi
+  jq -cr ".[] | select(.roles_flat | any(test(\"$1\"))) | {name: .name, roles: .roles_flat}" < /var/local/meraki/inventory/machines_map.json
 }
 function ecn {
   (cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.rb --cluster ${1})
