@@ -86,7 +86,6 @@ function link_file {
   if [ \( ! -e "$dest" \) -o "$FORCE" == y ]; then
     printf '%b\n' "Linking $dest -> $file..."
     ln -f -s "$file" "$dest"
-    continue
   fi
 
   choice "File $dest already exists, overwrite?"
@@ -96,7 +95,6 @@ function link_file {
     ln -f -s "$file" "$dest"
   else
     printf '%b\n' "Not overwriting file $dest, moving on..."
-    continue
   fi
 }
 
