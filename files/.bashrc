@@ -68,6 +68,7 @@ alias branch='git rev-parse --abbrev-ref HEAD'
 # ASDF
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+export ASDF_DATA_DIR=${ASDF_DIR}
 
 # UUIDs
 alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pbcopy && pbpaste && echo"
@@ -119,6 +120,7 @@ alias sgar='sm git apply --reverse'
 alias update_mmap='(cd ~/co/machines-map && gcmp)'
 alias cdl='cd ~/co/manage'
 alias cdlr='cd ~/co/manage-released'
+alias asudo='sudo -E env "PATH=$PATH"'
 alias m='~/co/manage/script/machines'
 function mm {
   if [ "$1" == "" ]; then return; fi
