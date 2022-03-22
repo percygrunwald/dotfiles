@@ -1,6 +1,4 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
-# Add $HOME/bin to the end of $PATH to allow for user binaries
-export PATH=$PATH:$HOME/bin
 
 # General dev
 alias setenv="source ./set_env.sh"
@@ -160,3 +158,6 @@ function fixssh {
 function github_stars {
   curl -s "https://api.github.com/repos/${1}" | jq '.["stargazers_count"]'
 }
+
+# Add $HOME/bin to $PATH to allow for user binaries with max priority
+export PATH=$HOME/bin:$PATH
