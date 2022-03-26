@@ -1,4 +1,13 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# dotfiles-related tasks
+# Find the real path of the dotfiles directory
+export DOTFILES_DIR=$(dirname $(dirname $(realpath ${BASH_SOURCE[0]})))
+# Update dotfiles every time the shell starts
+${DOTFILES_DIR}/bin/update.sh
 
 # General dev
 alias setenv="source ./set_env.sh"
