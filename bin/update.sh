@@ -58,7 +58,7 @@ printf "Checking for updates to dotfiles... "
 
 GIT_PULL_RES=$(git --git-dir ${REPO_PATH} pull)
 
-if [[ "$GIT_PULL_RES" == "Already up to date." ]]; then
+if [[ "$GIT_PULL_RES" =~ ^Already\ up ]]; then
   printf "Already up to date!\n"
   exit 0;
 fi
