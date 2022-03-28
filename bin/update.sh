@@ -65,5 +65,4 @@ fi
 
 printf "dotfiles updated, running install...\n"
 ${ABS_ROOT_DIR}/bin/install.sh -f
-printf "All files linked and updated, re-sourcing .bashrc...\n"
-source ~/.bashrc
+printf "All files linked and updated, please reload the shell to ensure changes were applied.\n"
