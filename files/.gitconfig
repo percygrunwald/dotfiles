@@ -6,3 +6,7 @@
 
 [pull]
   ff = only
+
+[user]
+  name = Percy Grunwald
+  email = percy.grunwald@gmail.com
