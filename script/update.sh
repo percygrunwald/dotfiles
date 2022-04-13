@@ -55,7 +55,7 @@ ABS_ROOT_DIR=$(dirname $(dirname $(abs_path ${0})))
 
 printf "Checking for updates to dotfiles... "
 
-GIT_PULL_RES=$(git --git-dir "${ABS_ROOT_DIR}/.git" --work-tree "${ABS_ROOT_DIR}" pull)
+GIT_PULL_RES=$(cd "${ABS_ROOT_DIR}" && git pull)
 
 if [[ "$GIT_PULL_RES" =~ ^Already\ up ]]; then
   printf "Already up to date!\n"
