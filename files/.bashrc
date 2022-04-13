@@ -25,13 +25,7 @@ function calc {
 }
 
 # Bundle
-# Temporarily disable bundle aliases
-# alias b="bundle"
-# alias bi="b install --path vendor/bundle"
-# alias binit="bi && b package && echo 'vendor/bundle/ruby' >> .gitignore"
-# alias bil="bi --local"
-# alias bu="b update"
-# alias be="b exec"
+alias be="bundle exec"
 
 # Rails
 alias rs="bin/rails server"
