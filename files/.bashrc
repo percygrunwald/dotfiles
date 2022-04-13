@@ -6,6 +6,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # dotfiles-related tasks
 # Find the real path of the dotfiles directory
 export DOTFILES_DIR=$(dirname $(dirname $(realpath ${BASH_SOURCE[0]})))
+
 # Update dotfiles every time the shell starts
 ${DOTFILES_DIR}/script/update.sh
 
