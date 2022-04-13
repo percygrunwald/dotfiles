@@ -52,11 +52,10 @@ if [ "$HELP" == "y" ]; then
 fi
 
 ABS_ROOT_DIR=$(dirname $(dirname $(abs_path ${0})))
-REPO_PATH="${ABS_ROOT_DIR}/.git"
 
 printf "Checking for updates to dotfiles... "
 
-GIT_PULL_RES=$(git --git-dir ${REPO_PATH} pull)
+GIT_PULL_RES=$(git --git-dir "${ABS_ROOT_DIR}/.git" --work-tree "${ABS_ROOT_DIR}" pull)
 
 if [[ "$GIT_PULL_RES" =~ ^Already\ up ]]; then
   printf "Already up to date!\n"
