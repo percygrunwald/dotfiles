@@ -99,6 +99,9 @@ alias drdp="drd --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
 alias drp="dr --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
 alias drm="docker rm -f"
 
+# Kubernetes
+alias k="kubectl"
+
 # Vagrant
 alias vu="vagrant up --parallel"
 alias vd="vagrant destroy --parallel"
