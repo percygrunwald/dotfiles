@@ -24,6 +24,24 @@ alias q='$(fc -ln -1)'
 function calc {
   awk "BEGIN {print $*}"
 }
+function s2c {
+  tr ' ' ','
+}
+function s2n {
+  tr ' ' '\n'
+}
+function c2s {
+  tr ',' ' '
+}
+function c2n {
+  tr ',' '\n'
+}
+function n2c {
+  tr '\n' ','
+}
+function n2s {
+  tr '\n' ' '
+}
 
 # Bundle
 alias be="bundle exec"
