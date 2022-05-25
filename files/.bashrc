@@ -149,11 +149,17 @@ alias asudo='sudo -E env "PATH=$PATH"'
 alias m='~/co/manage/script/machines'
 function mm {
   if [ "$1" == "" ]; then return; fi
-  jq -r ".[] | select(.name == \"$1\")" < /var/local/meraki/inventory/machines_map.json
+  jq -r ".[] | select(.name == \"$1\") | del(.ssh, .ssh_rsa_pub)" /var/local/meraki/inventory/machines_map.json
 }
 function mr {
   if [ "$1" == "" ]; then return; fi
-  jq -cr ".[] | select(.roles_flat | any(test(\"$1\"))) | {name: .name, roles: .roles_flat}" < /var/local/meraki/inventory/machines_map.json
+  jq -cr ".[] | select(.roles_flat | any(test(\"$1\"))) | {name: .name, roles: .roles_flat}" /var/local/meraki/inventory/machines_map.json
+}
+function n {
+  if [ "$1" == "" ]; then return; fi
+  SHARD_ID=$1
+  CLUSTER=${2:-meraki.com}
+  jq -r ".[] | select(.role_info.dashboard.id == $SHARD_ID and .cluster == \"$CLUSTER\") | del(.ssh, .ssh_rsa_pub)" /var/local/meraki/inventory/machines_map.json
 }
 function ecn {
   (cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.rb --cluster ${1})
