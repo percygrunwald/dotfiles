@@ -136,7 +136,7 @@ export PS1="\[$(tput bold)\]\[\033[38;5;10m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0
 
 # Meraki
 alias s0='svn revert -R . && svn st | cut -d " " -f 8 | xargs rm -rf'
-alias s1='svn up && be script/svn_avail_fast.rb -U'
+alias s1='svn up && script/svn_avail_fast.rb -U'
 alias s2='script/svnmerge merge -b -r'
 alias s3='svn commit -F svnmerge-commit-message.txt'
 alias sst='sm svn st'
