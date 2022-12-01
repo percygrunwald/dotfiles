@@ -146,6 +146,8 @@ alias update_mmap='(cd ~/co/machines-map && gcmp)'
 alias cdl='cd ~/co/manage'
 alias cdla='cd ~/co/manage/extra/ansible'
 alias cdlr='cd ~/co/manage-released'
+alias ec='jq -r "[.[] | select(.role_info.elasticsearch.cluster != null) | .role_info.elasticsearch.cluster] | unique[]" /var/local/meraki/inventory/machines_map.json'
+alias ecnc='(cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.rb --print-clusters)'
 alias asudo='sudo -E env "PATH=$PATH"'
 alias m='~/co/manage/script/machines'
 function mm {
