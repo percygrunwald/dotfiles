@@ -3,7 +3,7 @@
 set -e
 
 function print_usage {
-  printf 'Usage: %s [options]\n' ${0##*/}
+  printf 'Usage: %s [options]\n' "${0##*/}"
   cat << 'EOF'
 
 Options:
@@ -56,7 +56,7 @@ function choice {
   local prompt=$*
   local answer
 
-  read -p "$prompt " answer
+  read -rp "$prompt " answer
   case "$answer" in
     [yY1] | yes ) CHOICE=y ;;
     [nN0] | no ) CHOICE=n ;;
@@ -80,10 +80,10 @@ function choice {
 #   link_file /path/to/.dotfile
 function link_file {
   local file=$1
-  local rel_file_path=${file##$ABS_FILES_DIR/}
+  local rel_file_path=${file##"$ABS_FILES_DIR"/}
   local dest="$HOME/$rel_file_path"
 
-  if [ \( ! -e "$dest" \) -o "$FORCE" == y ]; then
+  if [ ! -e "$dest" ] || [ "$FORCE" == y ]; then
     printf '%b\n' "Linking $dest -> $file..."
     ln -f -s "$file" "$dest"
     return
@@ -91,7 +91,7 @@ function link_file {
 
   choice "File $dest already exists, overwrite?"
 
-  if [ $CHOICE == "y" ]; then
+  if [ "$CHOICE" == "y" ]; then
     printf '%b\n' "Overwriting existing file with link $dest -> $file..."
     ln -f -s "$file" "$dest"
   else
@@ -110,18 +110,18 @@ while getopts 'fh' OPTION; do
         ;;
   esac
 done
-shift $(($OPTIND - 1))
+shift $(( OPTIND - 1 ))
 
 if [ "$HELP" == y ]; then
   print_help >&2
   exit 1
 fi
 
-ABS_SCRIPT_PATH=$(abs_path $0)
-ABS_ROOT_DIR=$(dirname $(dirname "$ABS_SCRIPT_PATH"))
+ABS_SCRIPT_PATH=$(abs_path "$0")
+ABS_ROOT_DIR=$(dirname "$(dirname "$ABS_SCRIPT_PATH")")
 REL_FILES_DIR=files
 ABS_FILES_DIR="$ABS_ROOT_DIR/$REL_FILES_DIR"
-FILES=$(find $ABS_FILES_DIR -type f)
+FILES=$(find "$ABS_FILES_DIR" -type f)
 
 for FILE in $FILES; do
   link_file "$FILE"
