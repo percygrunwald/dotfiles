@@ -86,6 +86,9 @@ alias gd='git diff'
 alias gcane='git commit --all --amend --no-edit'
 alias branch='git rev-parse --abbrev-ref HEAD'
 
+# tmux
+alias tmca='tmux -CC attach'
+
 # ASDF
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
