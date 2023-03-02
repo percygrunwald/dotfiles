@@ -48,7 +48,6 @@ alias be="bundle exec"
 
 # Rails
 alias rs="bin/rails server"
-alias rg="bin/rails generate"
 alias rc="bin/rails console"
 alias r="bin/rake"
 alias rdm="bin/rake db:migrate"
