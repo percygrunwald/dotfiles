@@ -174,13 +174,17 @@ function inv {
   (cd ~/co/manage/extra/ansible && inventories/${1}.sh | jq . | less)
 }
 function fp {
-  branch=`branch`
+  branch=$(branch)
   git format-patch -1 --stdout > ~/patches/${branch}
-  echo ${branch}
+  echo "${branch}"
 }
 function p {
-  branch=`branch`
+  branch=$(branch)
   fp && scp ~/patches/${branch} ${1}:~
+}
+function pf {
+  scp -3 "sdg0:/home/percy/patches/$1" "chi0:/home/percy/$1"
+  ssh -t chi0 "scp /home/percy/$1 $2:/home/percy"
 }
 function ar {
   (cd extra/ansible && sudo bin/ansible-role ${1} -v -D)
