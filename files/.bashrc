@@ -129,6 +129,9 @@ alias vd="vagrant destroy --parallel"
 alias vdu="vd && vu"
 alias vp="vagrant provision"
 
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Homebrew gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
