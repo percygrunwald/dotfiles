@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -5,10 +7,10 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # dotfiles-related tasks
 # Find the real path of the dotfiles directory
-export DOTFILES_DIR=$(dirname $(dirname $(realpath ${BASH_SOURCE[0]})))
+export DOTFILES_DIR=$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")
 
 # Update dotfiles every time the shell starts
-${DOTFILES_DIR}/script/update.sh
+"${DOTFILES_DIR}"/script/update.sh
 
 # General dev
 alias setenv="source ./set_env.sh"
@@ -130,7 +132,14 @@ alias vdu="vd && vu"
 alias vp="vagrant provision"
 
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# VS Code
+if [ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]; then
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
 
 # Homebrew gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
@@ -199,7 +208,7 @@ function lrq {
   clrq "${1} --list"
 }
 function fixssh {
-  eval $(tmux show-env -s |grep '^SSH_')
+  eval "$(tmux show-env -s |grep '^SSH_')"
 }
 function github_stars {
   curl -s "https://api.github.com/repos/${1}" | jq '.["stargazers_count"]'
