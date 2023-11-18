@@ -107,9 +107,6 @@ alias hugodate="date '+%FT%T+08:00' | pbcopy && pbpaste && echo"
 alias pyserver="python -m SimpleHTTPServer"
 alias venv="source .venv/bin/activate"
 
-# pip
-export PATH=~/.local/bin:$PATH
-
 # Docker
 alias de="docker exec"
 alias deit="de -i -t"
