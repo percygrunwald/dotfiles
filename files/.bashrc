@@ -138,6 +138,11 @@ if [ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]; the
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
+# Rancher desktop
+if [ -d "$HOME/.rd/bin" ]; then
+  export PATH="$HOME/.rd/bin:$PATH"
+fi
+
 # Homebrew gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
