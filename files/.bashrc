@@ -10,7 +10,9 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOTFILES_DIR=$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")
 
 # Update dotfiles every time the shell starts
-"${DOTFILES_DIR}"/script/update.sh
+if [ -f "${DOTFILES_DIR}"/script/update.sh ]; then
+  "${DOTFILES_DIR}"/script/update.sh
+fi
 
 # General dev
 alias setenv="source ./set_env.sh"
