@@ -198,6 +198,9 @@ function p {
   branch=$(branch)
   fp && scp ~/patches/${branch} ${1}:~
 }
+function pd {
+  scp -3 "$1:/home/percy/patches/$2" "$3:/home/percy/$2"
+}
 function pf {
   scp -3 "sdg0:/home/percy/patches/$1" "chi0:/home/percy/$1"
   ssh -t chi0 "scp /home/percy/$1 $2:/home/percy"
