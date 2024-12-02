@@ -220,6 +220,10 @@ function fixssh {
 function github_stars {
   curl -s "https://api.github.com/repos/${1}" | jq '.["stargazers_count"]'
 }
+function artifactory_auth () {
+    OP_JSON=$(op item get artifactory.ikarem.io --vault Employee --format json)
+    export BUNDLE_ARTIFACTORY__IKAREM__IO="$(echo $OP_JSON | jq '.fields[] | select(.id=="username") | .value' | sed 's/"//g'):$(echo $OP_JSON |jq '.fields[] | select(.id=="password") | .value' | sed 's/"//g')"
+}
 
 # Add $HOME/bin to $PATH to allow for user binaries with max priority
 export PATH=$HOME/bin:$PATH
