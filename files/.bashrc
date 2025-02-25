@@ -93,9 +93,11 @@ alias branch='git rev-parse --abbrev-ref HEAD'
 alias tmc='tmux -CC attach || tmux -CC'
 
 # ASDF
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-export ASDF_DATA_DIR=${ASDF_DIR}
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+  export ASDF_DATA_DIR=${ASDF_DIR}
+fi
 
 # UUIDs
 alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pbcopy && pbpaste && echo"
