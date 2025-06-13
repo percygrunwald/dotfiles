@@ -226,6 +226,19 @@ function artifactory_auth () {
     OP_JSON=$(op item get artifactory.ikarem.io --vault Employee --format json)
     export BUNDLE_ARTIFACTORY__IKAREM__IO="$(echo $OP_JSON | jq '.fields[] | select(.id=="username") | .value' | sed 's/"//g'):$(echo $OP_JSON |jq '.fields[] | select(.id=="password") | .value' | sed 's/"//g')"
 }
+function asdf_remove_shell() {
+  local old_path="$PATH"
+  local new_path=""
+  local IFS=':'
+
+  for dir in $old_path; do
+    if [[ "$dir" != *asdf* ]]; then
+      new_path="${new_path:+$new_path:}$dir"
+    fi
+  done
+
+  export PATH="$new_path"
+}
 
 # Add $HOME/bin to $PATH to allow for user binaries with max priority
 export PATH=$HOME/bin:$PATH
