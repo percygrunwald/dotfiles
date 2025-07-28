@@ -171,6 +171,9 @@ alias ec='jq -r "[.[] | select(.role_info.elasticsearch.cluster != null) | .role
 alias ecnc='(cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.rb --print-clusters)'
 alias asudo='sudo -E env "PATH=$PATH"'
 alias m='~/co/manage/script/machines'
+if [[ $(hostname) =~ ^dev[0-9]+\.meraki\.com$ ]]; then
+  chruby ruby-3.3
+fi
 function mm {
   if [ "$1" == "" ]; then return; fi
   jq -r ".[] | select(.name == \"$1\") | del(.ssh, .ssh_rsa_pub)" /var/local/meraki/inventory/machines_map.json
