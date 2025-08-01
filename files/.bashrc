@@ -174,6 +174,9 @@ alias m='~/co/manage/script/machines'
 if [[ $(hostname) =~ ^dev[0-9]+\.meraki\.com$ ]]; then
   chruby ruby-3.3
 fi
+if [ -n "$K8S_PS1" ]; then
+  export PS1="$K8S_PS1"
+fi
 function mm {
   if [ "$1" == "" ]; then return; fi
   jq -r ".[] | select(.name == \"$1\") | del(.ssh, .ssh_rsa_pub)" /var/local/meraki/inventory/machines_map.json
