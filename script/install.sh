@@ -82,6 +82,14 @@ function link_file {
   local file=$1
   local rel_file_path=${file##"$ABS_FILES_DIR"/}
   local dest="$HOME/$rel_file_path"
+  local dest_dir
+  dest_dir=$(dirname "$dest")
+
+  # Create parent directory if it doesn't exist
+  if [ ! -d "$dest_dir" ]; then
+    printf '%b\n' "Creating directory $dest_dir..."
+    mkdir -p "$dest_dir"
+  fi
 
   if [ ! -e "$dest" ] || [ "$FORCE" == y ]; then
     printf '%b\n' "Linking $dest -> $file..."
