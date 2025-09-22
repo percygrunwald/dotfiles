@@ -150,10 +150,6 @@ fi
 # Homebrew gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
-# PS1/prompt
-# Built at https://bashrcgenerator.com/
-export PS1="\[$(tput bold)\]\[\033[38;5;10m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
-
 # Meraki
 alias s0='svn revert -R . && svn st | cut -d " " -f 8 | xargs rm -rf'
 alias s1='svn up && script/svn_avail_fast.rb -U'
@@ -245,6 +241,13 @@ function asdf_remove_shell() {
 
   export PATH="$new_path"
 }
+function dotfiles_diff_ps1() {
+  if ! git -C "$DOTFILES_DIR" diff --quiet; then
+    echo "[d]"
+  else
+    echo ""
+  fi
+}
 
 # Add $HOME/bin to $PATH to allow for user binaries with max priority
 export PATH=$HOME/bin:$PATH
@@ -256,3 +259,7 @@ export PATH="/Users/percy/.rd/bin:$PATH"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/percy/.lmstudio/bin"
 # End of LM Studio CLI section
+
+# PS1/prompt
+PS1="\[$(tput setaf 9)\]\$(dotfiles_diff_ps1)\[$(tput bold)\]\[\033[38;5;10m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
+export PS1
