@@ -170,9 +170,6 @@ alias m='~/co/manage/script/machines'
 if [[ $(hostname) =~ ^dev[0-9]+\.meraki\.com$ ]]; then
   chruby ruby-3.3
 fi
-if [ -n "$K8S_PS1" ]; then
-  export PS1="$K8S_PS1"
-fi
 function mm {
   if [ "$1" == "" ]; then return; fi
   jq -r ".[] | select(.name == \"$1\") | del(.ssh, .ssh_rsa_pub)" /var/local/meraki/inventory/machines_map.json
@@ -263,3 +260,7 @@ export PATH="$PATH:/Users/percy/.lmstudio/bin"
 # PS1/prompt
 PS1="\[$(tput setaf 9)\]\$(dotfiles_diff_ps1)\[$(tput bold)\]\[\033[38;5;10m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
 export PS1
+
+if [ -n "$K8S_PS1" ]; then
+  export PS1="$K8S_PS1"
+fi
