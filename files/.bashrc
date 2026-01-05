@@ -130,11 +130,6 @@ if [ -f "/opt/homebrew/bin/brew" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# ASDF
-if command -v asdf >/dev/null 2>&1; then
-  . <(asdf completion bash)
-fi
-
 # VS Code
 if [ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]; then
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -246,6 +241,11 @@ function dotfiles_diff_ps1() {
 
 # Add $HOME/bin to $PATH to allow for user binaries with max priority
 export PATH=$HOME/bin:$PATH
+
+# ASDF
+if command -v asdf >/dev/null 2>&1; then
+  . <(asdf completion bash)
+fi
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/percy/.rd/bin:$PATH"
