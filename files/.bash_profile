@@ -12,5 +12,3 @@ export PATH="/Users/percy/.rd/bin:$PATH"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/percy/.lmstudio/bin"
 # End of LM Studio CLI section
-
-. "$HOME/.cargo/env"

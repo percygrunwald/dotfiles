@@ -92,13 +92,6 @@ alias branch='git rev-parse --abbrev-ref HEAD'
 # tmux
 alias tmc='tmux -CC attach || tmux -CC'
 
-# ASDF
-if [ -f "$HOME/.asdf/asdf.sh" ]; then
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
-  export ASDF_DATA_DIR=${ASDF_DIR}
-fi
-
 # UUIDs
 alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pbcopy && pbpaste && echo"
 alias uuidfull="python -c 'import sys,uuid; sys.stdout.write(str(uuid.uuid4()))' | pbcopy && pbpaste && echo"
@@ -135,6 +128,11 @@ alias vp="vagrant provision"
 # Homebrew
 if [ -f "/opt/homebrew/bin/brew" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ASDF
+if command -v asdf >/dev/null 2>&1; then
+  . <(asdf completion bash)
 fi
 
 # VS Code
