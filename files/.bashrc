@@ -264,3 +264,5 @@ export PS1
 if [ -n "$K8S_PS1" ]; then
   export PS1="$K8S_PS1"
 fi
+
+. "$HOME/.cargo/env"
