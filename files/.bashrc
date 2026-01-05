@@ -263,4 +263,6 @@ if [ -n "$K8S_PS1" ]; then
   export PS1="$K8S_PS1"
 fi
 
-. "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
