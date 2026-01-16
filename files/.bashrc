@@ -239,11 +239,12 @@ function dotfiles_diff_ps1() {
   fi
 }
 
-# Add $HOME/bin to $PATH to allow for user binaries with max priority
+# Add $HOME/bin to $PATH to allow for user binaries with high priority
 export PATH=$HOME/bin:$PATH
 
 # ASDF
 if command -v asdf >/dev/null 2>&1; then
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   . <(asdf completion bash)
 fi
 

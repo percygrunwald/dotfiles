@@ -55,7 +55,7 @@ function choice {
   CHOICE=''
   local prompt=$*
   local answer
-
+  
   read -rp "$prompt " answer
   case "$answer" in
     [yY1] | yes ) CHOICE=y ;;
