@@ -161,7 +161,7 @@ alias ecnc='(cd ~/co/manage/ && bundle exec script/elasticsearch/cluster_nodes.r
 alias asudo='sudo -E env "PATH=$PATH"'
 alias m='~/co/manage/script/machines'
 if [[ $(hostname) =~ ^dev[0-9]+\.meraki\.com$ ]]; then
-  chruby ruby-3.3
+  chruby ruby-4.0
 fi
 function mm {
   if [ "$1" == "" ]; then return; fi
