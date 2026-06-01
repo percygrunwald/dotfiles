@@ -247,12 +247,6 @@ function token_count() {
 # Add $HOME/bin to $PATH to allow for user binaries with high priority
 export PATH=$HOME/bin:$PATH
 
-# ASDF
-if command -v asdf >/dev/null 2>&1; then
-  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-  . <(asdf completion bash)
-fi
-
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/percy/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
@@ -260,6 +254,16 @@ export PATH="/Users/percy/.rd/bin:$PATH"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/percy/.lmstudio/bin"
 # End of LM Studio CLI section
+
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+# ASDF
+if command -v asdf >/dev/null 2>&1; then
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+  . <(asdf completion bash)
+fi
 
 # PS1/prompt
 PS1="\[$(tput setaf 9)\]\$(dotfiles_diff_ps1)\[$(tput bold)\]\[\033[38;5;10m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
@@ -269,6 +273,4 @@ if [ -n "$K8S_PS1" ]; then
   export PS1="$K8S_PS1"
 fi
 
-if [ -f "$HOME/.cargo/env" ]; then
-  . "$HOME/.cargo/env"
-fi
+
