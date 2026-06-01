@@ -259,6 +259,9 @@ if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
 
+# Krew (k8s plugin management)
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # ASDF
 if command -v asdf >/dev/null 2>&1; then
   export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
