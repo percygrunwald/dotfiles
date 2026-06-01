@@ -4,6 +4,8 @@
 [ -z "$PS1" ] && return
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
+# Allow ** to expand to dirs and subdirs
+shopt -s globstar
 
 # dotfiles-related tasks
 # Find the real path of the dotfiles directory
@@ -237,6 +239,9 @@ function dotfiles_diff_ps1() {
   else
     echo ""
   fi
+}
+function token_count() {
+  python3 -c "import sys, tiktoken; print(len(tiktoken.get_encoding('cl100k_base').encode(sys.stdin.read())))"
 }
 
 # Add $HOME/bin to $PATH to allow for user binaries with high priority
