@@ -90,6 +90,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gcane='git commit --all --amend --no-edit'
 alias branch='git rev-parse --abbrev-ref HEAD'
+alias gm='git log -1 --pretty=%B | tail -n +3 | perl -pe "chomp if eof"'
 
 # tmux
 alias tmc='tmux -CC attach || tmux -CC'
