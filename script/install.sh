@@ -55,7 +55,7 @@ function choice {
   CHOICE=''
   local prompt=$*
   local answer
-  
+
   read -rp "$prompt " answer
   case "$answer" in
     [yY1] | yes ) CHOICE=y ;;
@@ -129,7 +129,7 @@ ABS_SCRIPT_PATH=$(abs_path "$0")
 ABS_ROOT_DIR=$(dirname "$(dirname "$ABS_SCRIPT_PATH")")
 REL_FILES_DIR=files
 ABS_FILES_DIR="$ABS_ROOT_DIR/$REL_FILES_DIR"
-FILES=$(find "$ABS_FILES_DIR" -type f)
+FILES=$(find "$ABS_FILES_DIR" \( -type f -o -type l \))
 
 for FILE in $FILES; do
   link_file "$FILE"
