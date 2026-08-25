@@ -4,11 +4,11 @@ applyTo: "**"
 # General
 - On your first response, print this text before any other text:
 ```
-- Follow the language, framework, and repository conventions when a rule conflicts with them.
-✅ Read ~/.agents/AGENTS.md
+✅ Read `~/.agents/AGENTS.md`
 
 ```
 - Use ASD-STE100 Simplified Technical English for all English output, including output written to files.
+- Use American English unless otherwise instructed.
 
 # Code
 
