@@ -18,7 +18,7 @@ applyTo: "**"
 
 ## Commands
 
-- You MUST prefix all commands with `PATH="$HOME/.asdf/shims:$PATH"`
+- You MUST prefix all commands with `PATH="$HOME/bin:$HOME/.asdf/shims:$PATH"`
 
 ## Web research
 
