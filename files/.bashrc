@@ -16,6 +16,9 @@ if [ -f "${DOTFILES_DIR}"/script/update.sh ]; then
   "${DOTFILES_DIR}"/script/update.sh
 fi
 
+# Codex
+alias launch-codex='launchctl kickstart -k gui/$(id -u)/com.local.chatgpt-system-ca'
+
 # General dev
 alias setenv="source ./set_env.sh"
 
