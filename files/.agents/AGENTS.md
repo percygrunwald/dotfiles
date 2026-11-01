@@ -31,12 +31,25 @@ applyTo: "**"
 - If a request fails because network access is restricted, request sandbox permission and retry. Do not treat a failure before permission was granted as a confirmed network outage.
 - If requests still fail after permission is granted, stop and report the error. Do not continue based on assumptions.
 
+## Git
+
+- Follow the "Conventional Commits" standard
+
 ## Code
 
-### General
+### Design and implementation
+
+#### Organization and readability
 
 - Follow the recommendations of Code Complete 2nd Ed. by Steve McConnell. If following the recommendations would produce code that is not idiomatic for a given language, use the language's idioms instead. The most important recommendations are:
   - Order code top-down by dependency and use, while respecting language requirements and idioms. Put callers and higher-level API methods before the helpers they call. Put a shared helper after all its callers. Order related methods by workflow or API use. Use alphabetical order only for peers with no clearer order.
+- Use newlines to add visual separation to make the code easier to read. Use blank lines to separate distinct phases in a function. Keep related statements together.
+- If a function body has multiple lines and the last line returns a value, add a preceeding newline.
+- When nesting 2 or more levels, consider whether it would be cleaner/more readable to refactor to remove the nesting.
+- Name non-trivial boolean checks with a descriptive local variable or function before using them in conditionals.
+
+#### Function and type design
+
 - Err on the side of "over-factoring":
   - Keep each function at one level of abstraction. An orchestration function should call named steps. Each step function should do one job.
   - Split distinct phases into named helpers, even when each helper has one caller. Apply this to closures, too. Keep inline closures short. Move multi-step behavior into a named function.
@@ -44,17 +57,23 @@ applyTo: "**"
   - Prefer named helpers for meaningful phases in parsing, serialization, I/O, and setup or cleanup.
   - Keep the caller as a short sequence of named steps. Do not add wrappers for trivial statements. Each helper should have a clear purpose.
   - If a file contains multiple classes/structs with implementations, consider breaking these into separate files even before they get "large" for conceptual
-- Use newlines to add visual separation to make the code easier to read.
-- If a function body has multiple lines and the last line returns a value, add a preceeding newline.
+- For function calls with a multi-field struct argument, build the struct in a named local first. Keep the call focused on the operation, not the setup.
+
+#### Dependencies
+
 - Always ask before adding dependencies to a project.
-- When nesting 2 or more levels, consider whether it would be cleaner/more readable to refactor to remove the nesting.
-- Name non-trivial boolean checks with a descriptive local variable or function before using them in conditionals.
 - Before adding upstream depedencies (e.g. crates, packages, etc.):
   - If it's a de-facto standard dependency for the language (e.g. serde in rust), feel free to add it if it's the right solution for the project
   - In other cases, make sure to research whether the dependency is mature and widely used (e.g. Github stars, forks, PRs, etc.) before adding it
   - When in doubt: ask. Or if explicitly instructed not to ask: err on the side of not adding immature dependencies.
+
+#### Refactoring
+
 - Keep functions focused on real use. Do not add or retain functions only to support tests. When a refactor changes an interface, update the tests to use it and remove redundant helpers. Add test-only code only when the behavior cannot be tested through the real interface
-- For function calls with a multi-field struct argument, build the struct in a named local first. Keep the call focused on the operation, not the setup.
+
+#### Comments
+
+- Add a brief comment when non-obvious behavior follows an external contract or preserves an important invariant. Explain why it is needed, not what the code does. Do not comment on self-explanatory code.
 
 ### Tests
 
